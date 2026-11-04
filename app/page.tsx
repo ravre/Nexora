@@ -1,0 +1,9 @@
+import Link from "next/link";
+import {ArrowUpRight,ArrowRight,Boxes,Stethoscope,Fan,Sparkles,LockKeyhole} from "lucide-react";
+import {SiteHeader} from "./components/site-header";
+import {SiteFooter} from "./components/site-footer";
+import {offers,sectorOrder} from "../lib/offers";
+const icons={boxes:Boxes,clinic:Stethoscope,climate:Fan,spark:Sparkles};
+export default function Home(){
+ return <div className="home-page"><a href="#main" className="skip-link">Vai al contenuto</a><SiteHeader/><main id="main" className="sector-home"><div className="journey" aria-label="Il percorso"><span className="current"><i>01</i> Il tuo settore</span><span className="journey-line"/><span><i>02</i> La tua soluzione</span><span className="journey-line"/><span><i>03</i> Parliamone</span></div><div className="home-title"><p className="eyebrow">AUTOMAZIONI AI. PROBLEMI CONCRETI.</p><h1>In che <span>settore</span><br/>è la tua azienda?</h1><p>Il tuo lavoro ha le sue regole. Anche la tua automazione.<br className="desktop-break"/> Scegli il settore e scopri da dove possiamo partire.</p></div><div className="sector-grid">{sectorOrder.map((s,i)=>{const offer=offers[s];const Icon=icons[offer.icon];return <Link key={s} className={`sector-card ${s==="altre-aziende"?"sector-other":""}`} href={`/${s}`}><div className="sector-card-top"><span className="sector-icon"><Icon size={25} strokeWidth={1.45}/></span><span className="sector-number">0{i+1}</span></div><div className="sector-card-bottom"><div><h2>{offer.cardTitle}</h2><p>{offer.cardDescription}</p></div><span className="card-arrow"><ArrowUpRight size={21}/></span></div></Link>})}</div><div className="home-reassurance"><span><LockKeyhole size={13}/> Nessun dato richiesto per esplorare</span><span className="small-divider"/><span>Prima il processo. Poi la tecnologia.<ArrowRight size={13}/></span></div></main><SiteFooter simple/></div>;
+}
